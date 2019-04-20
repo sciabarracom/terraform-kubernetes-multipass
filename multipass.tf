@@ -1,0 +1,3 @@
+module "multipass" {
+    source = "./multipass"
+}
