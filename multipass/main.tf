@@ -11,17 +11,8 @@ resource "null_resource" "master" {
         private_key = "${file(pathexpand("~/.ssh/id_rsa"))}"
     }
  
-    provisioner "file" {
-        source = "${path.module}/script/kube-init.sh"
-        destination = "/tmp/kube-init.sh"
-    }
-
     provisioner "remote-exec" {
-        inline = [
-            "cloud-init status --wait",
-            "chmod +x /tmp/kube-init.sh",
-            "bash /tmp/kube-init.sh",
-        ]
+        script = "${path.module}/script/kube-init.sh"
     }
 
     provisioner "local-exec" {

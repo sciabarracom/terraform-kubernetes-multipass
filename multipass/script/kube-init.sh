@@ -1,4 +1,6 @@
 #!/bin/bash
+echo "*** Waiting for Clud-Init to finish ***"
+cloud-init status --wait
 echo "*** Kubernetes Pulling Images:"
 kubeadm config images pull
 echo "*** Kubernetes Initializing:"
