@@ -26,7 +26,8 @@ resource "null_resource" "master" {
 
     provisioner "local-exec" {
         command = <<CMD
-scp  -i ${pathexpand("~/.ssh/id_rsa")} root@${data.external.master.result.ip}:/etc/kubernetes/admin.conf ${pathexpand("~/.kube/config")}
+mkdir ${pathexpand("~/.kube")}
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  -i ${pathexpand("~/.ssh/id_rsa")} root@${data.external.master.result.ip}:/etc/kubernetes/admin.conf ${pathexpand("~/.kube/config")}
 CMD 
     }
 }
